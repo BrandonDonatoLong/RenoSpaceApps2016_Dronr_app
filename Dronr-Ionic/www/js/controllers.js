@@ -5,12 +5,14 @@ angular.module('starter.controllers', [])
 
   var mapOptions = {
     center: myLatlng,
-    zoom: 16,
+    zoom: 12,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
   var map = new google.maps.Map(document.getElementById("map"), mapOptions);
   var noFlyZones = [];
+  
+  var dronrMarker;
 
   $scope.$watch(function () {return DronrUpdate.value;}, function(newDronrData, oldDronrData)
   {
@@ -71,9 +73,20 @@ angular.module('starter.controllers', [])
   });
 
   var updatePosition = function (lat, lng){
-    map.setCenter(new google.maps.LatLng(lat, lng));
+	var latLong = new google.maps.LatLng(lat, lng);
+    map.setCenter(latLong);
+	if(!dronrMarker){
+		  dronrMarker = new google.maps.Marker({
+			position: latLong,
+			title: 'Dronr',
+			map: map
+			});
+	  }
+	  else{
+		  dronrMarker.setPosition(latLong);
+	  }
   };
-
+  
   $scope.map = map;
   updatePosition ({latitude: 37.3000, longitude: -120.4833});
 })
@@ -87,9 +100,11 @@ angular.module('starter.controllers', [])
 })
 
 .controller('WeatherCtrl', function($scope) {
+	
 })
 
 .controller('FlightPathCtrl', function($scope) {
+  
 })
 
 .controller('SettingsCtrl', function($scope, DronrSettings) {
