@@ -71,4 +71,8 @@ angular.module('starter.controllers', [])
 })
 
 .controller('FlightPathCtrl', function($scope) {
+})
+
+.controller('SettingsCtrl', function($scope, DronrSettings) {
+  $scope.settings = DronrSettings;
 });
