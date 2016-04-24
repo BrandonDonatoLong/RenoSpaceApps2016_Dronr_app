@@ -1,5 +1,17 @@
 <ion-view view-title="Weather">
   <ion-content class="padding">
-    <h2>Weather</h2>
+    Current Temperature: {{ weather.temp }}<br/>
+    Wind Speed: {{ weather.wind_speed }} mph<br/>
+    Wind Direction: {{ weather.wind_direction | degreesToDirection }}<br/>
+    Gusts up to: {{ weather.wind_gust }} mph<br/>
+    Chance of Precipitation: {{ weather.precip }}%<br/>
+    Visibility: {{ weather.visibility }} miles<br/>
+    <br/>
+    Hazards:
+    <ul>
+      <li ng-repeat="hazard in weather.hazards">
+        <a href="{{hazard.url}}">{{hazard.desc}}</a>
+      </li>
+    </ul>
   </ion-content>
 </ion-view>
