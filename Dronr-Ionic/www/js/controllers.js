@@ -10,6 +10,7 @@ angular.module('starter.controllers', [])
   };
 
   var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  var noFlyZones = [];
 
   $scope.$watch(function () {return DronrUpdate.value;}, function(newDronrData, oldDronrData)
   {
@@ -19,7 +20,19 @@ angular.module('starter.controllers', [])
 			updatePosition(newDronrData.location.lat, newDronrData.location.lng);
 		}
 		if(newDronrData.no_fly_zones){
-			for(var noFlyZone in no_fly_zones){
+			for(var key in newDronrData.no_fly_zones){
+				var noFlyZone = newDronrData.no_fly_zones [key];
+				var drawNoFlyZone = true;
+				
+				for(var currentNoFlyZoneKey in noFlyZones){
+					var currentNoFlyZone = noFlyZones[currentNoFlyZoneKey];
+					if(currentNoFlyZone.name == noFlyZone.name){
+						drawNoFlyZone = false;
+					}
+				}
+				
+				if(drawNoFlyZone == true){
+					
 				if(noFlyZone.type == "polygon"){
 					var Coords = noFlyZone.coords;
 					
@@ -32,8 +45,11 @@ angular.module('starter.controllers', [])
 						fillOpacity: 0.35
 						});
 					restrictedAirspace.setMap(map);
+					
+					noFlyZones.push(noFlyZone);
 				}
 				else{
+					
 					var restrictedAirspaceAirport = new google.maps.Circle({
 						strokeColor: '#FF0000',
 						strokeOpacity: 0.8,
@@ -42,8 +58,11 @@ angular.module('starter.controllers', [])
 						fillOpacity: 0.35,
 						map: map,
 						center: noFlyZone.coords[0],
-						radius: 5.0
+						radius: 8046.72
 					});
+					
+					noFlyZones.push(noFlyZone);
+				}
 				}
 			}
 		}
