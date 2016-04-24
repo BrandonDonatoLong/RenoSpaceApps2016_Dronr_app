@@ -1,6 +1,15 @@
 angular.module('starter.services', [])
 
-.factory('DronrUpdate', function($http, $timeout){
+.factory('DronrSettings', function($http, $timeout){
+    var settings = {
+      droneId: '123',
+      server: 'http://localhost:8080/'
+    };
+
+    return settings;
+  })
+
+.factory('DronrUpdate', function($http, $timeout, DronrSettings){
   var data = {
     value: {},
     status: 0,
@@ -8,7 +17,7 @@ angular.module('starter.services', [])
   };
 
   var pollData = function() {
-      $http.get('http://localhost:8080/drone').then(function (r) {
+      $http.get(DronrSettings.server + 'drone/' + DronrSettings.droneId).then(function (r) {
         console.log(r);
         data.value = r.data;
         data.status = r.status;
