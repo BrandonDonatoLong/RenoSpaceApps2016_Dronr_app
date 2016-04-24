@@ -106,7 +106,7 @@ angular.module('starter.controllers', [])
 
   $scope.$watch(function () {return DronrUpdate.value;}, function(newDronrData, oldDronrData) {
     if (newDronrData && newDronrData.weather) {
-      weather = newDronrData.weather;
+      $scope.weather = newDronrData.weather;
     }
   });
 

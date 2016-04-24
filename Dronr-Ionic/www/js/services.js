@@ -22,10 +22,10 @@ angular.module('starter.services', [])
         data.value = r.data;
         data.status = r.status;
         data.statusText = r.statusText;
-        $timeout(pollData, 30000);
+        $timeout(pollData, 5000);
       }, function(e){
         console.log(e);
-        $timeout(pollData, 30000);
+        $timeout(pollData, 5000);
       });
   };
 
