@@ -8,7 +8,7 @@ angular.module('starter.services', [])
   };
 
   var pollData = function() {
-      $http.get('http://localhost:8080/drone').then(function (r) {
+      $http.get('http://10.0.1.15:8080/drone').then(function (r) {
         console.log(r);
         data.value = r.data;
         data.status = r.status;
