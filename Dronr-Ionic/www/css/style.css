@@ -2,6 +2,14 @@
   height: 100%;
 }
 
+.warning {
+  background-color: #ffc900;
+}
+
+.warning a {
+  color: #fff;
+}
+
 #map {
   width: 100%;
   height: 100%;

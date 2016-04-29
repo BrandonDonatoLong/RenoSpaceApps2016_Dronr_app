@@ -1,17 +1,46 @@
 <ion-view view-title="Weather">
-  <ion-content class="padding">
-    Current Temperature: {{ weather.temp }}<br/>
-    Wind Speed: {{ weather.wind_speed }} mph<br/>
-    Wind Direction: {{ weather.wind_direction | degreesToDirection }}<br/>
-    Gusts up to: {{ weather.wind_gust }} mph<br/>
-    Chance of Precipitation: {{ weather.precip }}%<br/>
-    Visibility: {{ weather.visibility }} miles<br/>
-    <br/>
-    Hazards:
-    <ul>
-      <li ng-repeat="hazard in weather.hazards">
-        <a href="{{hazard.url}}">{{hazard.desc}}</a>
-      </li>
-    </ul>
+    <div ng-controller="WeatherCtrl">
+      <div class="list">
+        <div class="bar bar-header bar-energized item" ng-if="weather.hazards.length > 0">
+          <a class="title" href="{{weather.hazards[0].url}}">{{weather.hazards[0].desc}}</a>
+        </div>
+
+        <div class="bar bar-header bar-stable item">
+          <h1 class="title">Current Weather</h1>
+        </div>
+      </div>
+
+      <div class="list">
+        <div class="item item-icon-left">
+          <i class="icon ion-thermometer"></i>
+          Current Temperature: {{ weather.temp }}
+        </div>
+        <div class="item item-icon-left">
+          <i class="icon ion-ios-speedometer-outline"></i>
+          Wind Speed: {{ weather.wind_speed }} mph, gusts up to {{ weather.wind_gust }} mph<br/>
+        </div>
+        <div class="item item-icon-left">
+          <i class="icon ion-compass"></i>
+          Wind Direction: {{ weather.wind_direction | degreesToDirection }}<br/>
+        </div>
+        <div class="item item-icon-left">
+          <i class="icon ion-ios-rainy-outline"></i>
+          Chance of Precipitation: {{ weather.precip }}%<br/>
+        </div>
+        <div class="item item-icon-left">
+          <i class="icon ion-ios-eye-outline"></i>
+          Visibility: {{ weather.visibility }} miles<br/>
+        </div>
+        <div class="item item-icon-left">
+          <i class="icon ion-nuclear"></i>
+          Hazards:
+          <ul>
+            <li ng-repeat="hazard in weather.hazards">
+              <a href="{{hazard.url}}">{{hazard.desc}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
